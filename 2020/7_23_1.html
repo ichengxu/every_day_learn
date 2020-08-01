@@ -1,0 +1,21 @@
+<script>
+	console.log("main1");
+	process.nextTick(function(){
+		console.log('process.nextTick');
+	});
+	setTimeout(()=>{
+		console.log('setTimeout')
+		process.nextTick(()=>{
+			console.log('setTimeout - process.nextTick')
+		})
+	})
+	new Promise((resolve,reject)=>{
+		console.log('promise');
+		resolve();
+	}).then(function(){
+		console.log('promise then')
+	})
+	console.log('main2')
+
+	//main1->main2->process.nextTick->promise->promise then->setTimeout->setTimeout - process.nextTick
+</script>

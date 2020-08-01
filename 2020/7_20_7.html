@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑-为什么v-for的key必须是对那个的项不能是索引</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+		</style>
+		<script src='https://unpkg.com/vue'></script>
+	</head>
+	<body >
+		<div id='app'>
+			<demo-key v-for="(item,i) in items" @click.native='fn(i)' :key='i'>
+				{{item}}
+			</demo-key>	
+		
+		</div>
+		<script>
+        randomColor = ()=>{
+			return  `hsl(${Math.floor(Math.random()*360)},75%,85%)`
+		}
+		const DemoKey = {
+			template:`
+			  <p :style='{backgroundColor:color}'>
+			 	<slot></slot>
+			  </p>
+			 `,
+			 data:()=>{
+				 return {
+					 color:randomColor()
+				 }
+			 }
+		}
+	
+		var vm = new Vue({
+				el:"#app",
+				components:{
+					DemoKey
+				},
+				methods:{
+					fn(i){
+						this.items.splice(i,1)
+					}
+				},
+				data:()=>({
+					items:['one','two','three','four','five']
+				})
+		})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<head>
+	<title>composition api</title>
+	<script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+	<div id='app'>
+		<p>{{num}}</p>
+		<button @click='add'>+</button>
+		<button @click='sub'>-</button>
+	</div>
+</body>
+<script>
+	
+	const v3 = {
+		setup(){
+		let num = Vue.ref(0)
+		const add = () =>{
+			num.value++
+		}
+		const sub = () =>{
+			num.value--
+		}
+			return {
+				num,
+				add,
+				sub
+			}
+		}
+	}
+	Vue.createApp(v3).mount('#app')
+</script>

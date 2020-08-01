@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑-自定义v-model输入的东西</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			canvas{
+				border:1px solid;
+			}
+		</style>
+	</head>
+	<body >
+		<div id='app'>
+		    
+			<input :value='oData' @input='fn'>
+			{{oData}}
+		</div>
+		<script src='https://unpkg.com/vue'></script>
+		<script>
+
+		var vm = new Vue({
+				el:"#app",
+				data:{
+					oData:""
+				},
+				methods:{
+					fn(e){
+						let reg = /^\d{0,}$/g
+						let val = e.target.value
+						//坑点给val赋值不好使只能给e.target.value赋值
+						if(reg.test(val)){
+						 	this.oData = val
+						 }else{
+							 e.target.value = this.oData
+						 }
+					}
+				}
+			})
+		
+		</script>
+	</body>
+</html>

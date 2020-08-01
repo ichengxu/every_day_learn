@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑-slot</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			canvas{
+				border:1px solid;
+			}
+		</style>
+	</head>
+	<body >
+		<div id='app'>
+			<com2 slot-scope='user'>
+				 哈哈
+			
+			</com2>
+			<!-- 
+				<com1 slot-scope='user'>
+				<h1 slot='header'>我是header</h1>
+				<p slot='buttons'>哈哈我是第二个slot</p> 
+				<p slot='test'>
+					123
+				{{user.name}}
+				</p>
+			</com1>
+			-->
+			
+			<!-- <site-header></site-header>
+			<div class='container'>
+				<site-sidebar></site-sidebar>	
+				<site-main></site-main>
+			</div>	
+			<site-footer></site-footer> -->
+		</div>
+		<script src='https://unpkg.com/vue'></script>
+		<script>
+		const com2 = {
+			template:`
+				<div>
+					testasdsad
+					<slot :user='user'>
+						test
+					</slot>
+				</div>
+			`,
+			data:function(){
+				return{
+					user:undefined
+				}
+			},
+			mounted(){
+				this.user = {
+					name:'哈哈'
+				}
+				// this.user.name = '嘻嘻'	
+			}
+		}
+
+		Vue.component('com1',{
+			template:`
+				<div>
+					<slot name='header'>header</slot>
+					<button>
+						<slot name='buttons'>
+							<span>我是默认内容</span>
+						</slot>
+					</button>
+					<slot name = 'test' :user='user'>
+						test
+					</slot>
+				</div>
+			`,
+			data:function(){
+				return{
+					user:undefined
+				}
+			},
+			mounted(){
+				// this.user.name = '嘻嘻'	
+			}
+		})
+		var vm = new Vue({
+				el:"#app",
+				components:{
+					com2
+				}
+			})
+		
+		</script>
+	</body>
+</html>

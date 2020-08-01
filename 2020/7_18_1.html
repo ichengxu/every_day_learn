@@ -1,0 +1,30 @@
+<head>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+	</style>
+	<script src="https://cdn.bootcdn.net/ajax/libs/pixi.js/4.5.5/pixi.min.js"></script>
+</head>
+<script>
+	window.onload=function(){
+
+	
+	// 1 create the renderer
+	let renderer = PIXI.autoDetectRenderer(255,255);
+	// console.log(renderer)
+	// 2 add the element to html document
+	document.body.appendChild(renderer.view);
+	// 3 create a container called the stage
+	let stage  = new PIXI.Container();
+	// 4 tell the renderer to render stage
+	renderer.backgroundColor = 0xFFFF00;
+
+	renderer.render(stage);
+
+	renderer.view.style.border = "1px dashed black";
+	
+	
+}	
+</script>

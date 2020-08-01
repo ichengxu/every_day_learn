@@ -1,0 +1,25 @@
+<head>
+	<title>promise</title>
+</head>
+<body>
+	<div id='app'></div>
+</body>
+<script type='text/javascript'>
+	//创建Promise
+	let p = new Promise(function(resolve, reject){
+    setTimeout(function(){
+        let num = Math.random()
+        if (num > 0.5) {
+            resolve(num)
+        }else{
+            reject(num)
+        }
+    }, 1000)
+})
+p.then(function(num){
+    console.log('大于0.5的数字：', num)
+},function(num){
+    console.log('小于等于0.5的数字', num)
+})
+
+</script>

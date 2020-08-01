@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs3.0</title>
+		<script src="https://unpkg.com/vue@next"></script>
+	</head>
+	<body >
+		<div id="hello-vue" class="demo">
+			{{oData}}
+		</div>
+	
+		<script>
+		let {h,ref,reactive,onMounted, onUpdated, onUnmounted}  = Vue
+		//h 渲染函数可以直接使用vnode写法
+		//ref 类似于store 但是用h函数的时候必须指定value	
+		//reactive 功能于ref相同。但是可以直接用更接近原生对象
+		//setup 默认为created钩子
+		//onBeforeMount 等同于beforeMount
+		//onMounted   挂载钩子等同于mounted
+		//onBeforeUpdate 等同于beforeUpdate
+		//onBeforeUnmount 等同于beforeUnmount 
+		//onUpdated  更新钩子等同于updated
+		//onUnmounted  卸载钩子unmounted
+		//console.log(h,ref,reactive)
+		Vue.createApp({
+			setup(){
+				const oData = ref({
+					name:"vue3.0",
+					age:20
+				})
+				// return {
+				// 	oData
+				// }
+				return ()=>{
+					return h('div',[oData.value.name])
+				}
+			}
+		}).mount('#hello-vue')
+		</script>
+	</body>
+</html>

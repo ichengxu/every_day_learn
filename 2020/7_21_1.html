@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑-vue-router</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+		</style>
+		<script src='https://unpkg.com/vue'></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.0.5/vue-router.js"></script>
+	</head>
+	<body >
+		<div id='app'>
+		<router-link tag='button' :to="{path:'/home'}">home</router-link>
+		<router-link tag='button' :to="{name:'oid',params:{id:123}}">test</router-link>
+		<router-view></router-view>
+		</div>
+		<script>
+		/*
+			全局级别守卫2个：beforeEach、beforeAfter
+			路由级别守卫1个：beforeEnter
+			组件级别守卫3个：beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave
+		*/	
+		let com1 = {
+			template:`
+				<h1>我是com1</h1>
+			`
+		}
+		let com2 = {
+			props:['id'],
+			template:`
+				<h1>我是com2我的id为{{id}}</h1>
+			`,
+			mounted(){
+				// alert(this.$route.params.id)
+			},
+			beforeRouteEnter(to,from,next){
+				next((v)=>{
+				//需要在这里获取this也就是vue对象
+					console.log(v)
+				})
+			},
+			beforeRouteUpdate(to,from,next){
+				//因为已经有this了所以不需要next的回调
+				console.log(1)
+			},
+			beforeRouteLeave(to,from,next){
+				//因为已经有this了所以不需要next的回调。next表示继续
+				console.log('leave')
+				next()
+			}
+		}
+		let router = new VueRouter({
+			routes:[
+				{
+					path:'/home',
+					name:'home',
+					component:com1
+				},
+				{
+					path:'/test/:id',
+					name:'oid',
+					props:true,
+					component:com2,
+					meta:{
+						requireAuth:true
+					},
+					beforeEnter(to,from,next){
+						//路由守卫
+						//思路通过给路由设置meta属性然后通过to去获取next函数当没有参数的时候为允许通过当next函数有参数path的时候为跳转到path
+						let reqAu = to.matched.some((v)=>{
+							return v.meta.requireAuth
+						})
+						console.log(to.matched,to.meta.requireAuth)
+						if(reqAu){
+							next()
+						}else{
+							next('/home')
+						}
+					}
+				}
+
+			]
+		})	
+		var vm = new Vue({
+				el:"#app",
+				router:router
+		})
+		</script>
+	</body>
+</html>

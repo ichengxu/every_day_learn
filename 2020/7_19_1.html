@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			canvas{
+				border:1px solid;
+			}
+		</style>
+	</head>
+	<body >
+		<div id='app'>
+			<input type='text' :value='inputText' @input='inputText = $event.target.value' />
+			<br />
+			<input type='text' v-model='oData.name'>
+			<p @click='test(12)'>name: {{oData.name}}</p>
+			<P>{{inputText}}</P>
+			<P v-html='inputText'></P>
+			<p v-blink='30'>哈哈</p>
+			<canvas ref='myCanvas' width='500' height='500'></canvas>
+		</div>
+		<script src='https://unpkg.com/vue'></script>
+		<script>
+			Vue.directive('blink',(el,binding)=>{
+				let isVisible = true;
+				setInterval(function(){
+					isVisible = !isVisible
+					el.style.visibility = isVisible?'visible':'hidden';
+				},binding.value||1000)
+			})
+			new Vue({
+				el:"#app",
+				data:function(){
+					return {
+						inputText:'',
+						oData:{
+							name:""
+						}
+					}
+				},
+				methods:{
+					test(e){
+						console.log(this.$event)
+					},
+					fn(e){
+						this.inputText = e.target.value
+					}
+				},
+			
+				watch:{
+					inputText(newVal,oldVal){
+						console.log(oldVal,newVal)
+					},
+					// 'oData.name'(newval,oldVal){
+					// 	console.log(val)
+					// },
+					oData:{
+						handler(newVal,oldVal){
+							console.log(newVal)
+						},
+						immediate: true,
+						deep:true
+					}
+				},
+				created(){
+					
+				},
+				mounted(){
+					let canvas = this.$refs.myCanvas;
+					let ctx=canvas.getContext("2d");
+				
+					ctx.fillStyle="#FF0000";
+					ctx.fillRect(0,0,150,75);
+					
+				}
+			})
+			
+		</script>
+	</body>
+</html>

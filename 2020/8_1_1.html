@@ -1,0 +1,50 @@
+<head>
+	<title>js模板写法</title>
+</head>
+<body>
+	<div id='app'></div>
+</body>
+<script type='text/tpl' id='tpl'>
+	<div>
+		<p>我的名字为:{{name}}</p>
+		<p>我的年龄为:{{age}}</p>
+	</div>
+</script>
+<script type='text/javascript'>
+	let app = document.querySelector('#app');
+	let tpl = document.querySelector('#tpl').innerHTML;
+	let data =[
+		{
+			name:"js",
+			age:20
+		},
+		{
+			name:"vue",
+			age:8
+		},
+		{
+			name:'webpack',
+			age:23
+		}
+	]
+	let list = ''
+	for(let i in data){
+		let item = data[i];
+		list +=tpl.replace(regTpl(),
+		function(node,key){
+		// console.log(node,key)
+		/*
+			return {
+			'name':item.name,
+			'age':item.age
+		 	 }[key]
+		*/
+		return item[key]
+		}
+		)
+	}
+	app.innerHTML = list;
+	function regTpl(){
+		return new RegExp(/{{(.*?)}}/,'igm');
+	}
+</script>

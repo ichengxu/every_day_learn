@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑-vue-router</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+		</style>
+		<script src='https://unpkg.com/vue'></script>
+
+	</head>
+	<body >
+		<div id='app'>
+		</div>
+		<script>
+		var vm = new Vue({
+				el:"#app",
+				data:function(){
+					return {
+						age:1
+					}
+				},
+				beforeCreate(){
+					//beforeCreate在initState之前执行【initState的作用就是初始化data、prop、method、compuetd、watch】
+					//vue-router 和 vuex 都混合了 beforeCreate 钩子函数
+					alert(this.age)
+				},
+				created(){
+				    //beforeCreate在initState之后执行
+					//生命周期钩子vue都是通过callhooks函数执行的。其实就是遍历参数执行也是就是执行对应生命周期函数
+					alert(this.age)
+				}
+		})
+		</script>
+	</body>
+</html>

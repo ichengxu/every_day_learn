@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑-vuex</title>
+		<style>
+			
+		</style>
+		<script src='https://unpkg.com/vue'></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.js"></script>
+	</head>
+	<body >
+		<div id='app'>
+			<p>
+				同步更新：	
+				<button @click='add'>+</button>
+				<button @click='sub'>-</button>
+			</p>
+			{{$store.state.messgeCount}}
+		</div>
+		<script>
+		//作用满足多个组件进行状态共享	
+		//可以把store里面的state看出所有组件的公共的data用于保存所有组件公共数据
+		let store = new Vuex.Store({
+			state:{
+				messgeCount:10,
+				list:[]
+			},
+			getters:{
+				//getters属性可以理解为所有组件的computed属性，返回值会根据他的依赖被缓存起来只有依赖被改变的时候才会重新计算
+			},
+			actions:{
+				//异步
+			},
+			mutations:{
+				//同步
+				tianjia(state){
+					state.messgeCount++
+				},
+				jianshao(state){
+					state.messgeCount--
+				}
+			}
+		})	
+		var vm = new Vue({
+				el:"#app",
+				store:store,
+				methods:{
+					add(){
+						this.$store.commit("tianjia")
+					},
+					sub(){
+						this.$store.commit("jianshao")
+					}
+				}
+		})
+		</script>
+	</body>
+</html>

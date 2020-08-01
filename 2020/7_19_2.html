@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			canvas{
+				border:1px solid;
+			}
+		</style>
+	</head>
+	<body >
+		<div id='app'>
+			<!-- <test-abc /> -->
+			<Com1 :price="100"  unit="hah" :number.sync='numberToDisplay'></Com1>
+			<Com2 ref='com2' name='prop传递' age='20' @change='fn'/>
+			
+		</div>
+		<script src='https://unpkg.com/vue'></script>
+		<script>
+			const Com1 = {
+				template:`
+					<div>
+						haha我是component1
+						<p>price: {{price}}</p>
+						<p>unit: {{unit}}</p>
+						<h1>当前数字是{{localNum}}</h1>
+					</div>
+				`,
+				props:{
+					number:{
+					 	type:Number,
+					 	required:true
+					},
+					price:{
+						type:Number,
+						required:true,
+						validator(value){
+							return value > 0
+						}
+					},
+					unit:{
+						type:String,
+						default:'$'
+					}
+				},
+				computed:{
+					localNum:{
+						get(){
+							return this.number
+						},
+						set(val){
+							
+							this.$emit('update:number',val)
+						}
+					}
+				},
+				mounted(){
+		
+					setInterval(()=>{
+						// this.$emit('update:number',this.number + 1)
+						this.localNum++
+					},1000)
+				}
+			}
+			const Com2 = {
+				template:`
+					<div>
+						xixi我是{{component2}}
+						<p>{{name}}</p>
+						<p>{{$attrs}}</p>
+					</div>
+				`,
+				props:[
+					'name'
+				],
+				mounted(){
+					console.log(this.$listeners)
+				},
+				data:function(){
+					return{
+						component2:'component 2 test demo'
+					}
+				}
+			}
+			Vue.component('test-abc',{
+				template:`
+				<h1>
+					我是全局组件
+				</h1>
+				`
+			})
+
+		var vm = new Vue({
+				el:"#app",
+				data:{
+					numberToDisplay:0
+				},
+				components:{
+					Com1,
+					Com2
+				},
+				methods:{
+					fn(){
+						console.log(1)
+					}
+				},
+				mounted(){
+					
+					this.$nextTick(()=>{
+						//通过$refs组件通信
+						console.log(this.$refs.com2.component2)
+						//通过$root组件通信
+						console.log(this.$root.$children[1].component2)
+						//通过$children和$parent实现组件通信
+						console.log(this.$children[1].component2)
+					})
+				}
+			})
+		
+		</script>
+	</body>
+</html>

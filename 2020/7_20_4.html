@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs快跑-自定义事件</title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			canvas{
+				border:1px solid;
+			}
+		</style>
+		<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+	</head>
+	<body >
+		<div id='app'>
+			<com2>
+					<template v-slot:haha='suiyi'>
+							v-slot代替slot
+							{{suiyi}}
+					</template>	
+			</com2>
+			<com2>
+					<template v-slot:haha></template>
+			</com2>
+			<com2>
+					<template v-slot='haha' >
+						{{haha}}
+					</template>
+			</com2>
+		</div>
+		
+		<script>
+		//参考文章：https://www.cnblogs.com/bulici/p/11733840.html 
+		const com2 = {
+			template:`
+				<div>
+					<slot name='haha' :user="user">
+						我是默认
+					</slot>
+					<slot :user='test'>
+						testtesttest
+					</slot>
+				</div>
+			`,
+			data:()=>({
+				user:'hello vue-slot',
+				test:'vuejs - v-slot'
+			})
+		}
+		var vm = new Vue({
+				el:"#app",
+				components:{
+					com2
+				}
+		})
+		</script>
+	</body>
+</html>

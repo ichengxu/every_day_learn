@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs3.0</title>
+		<script src="https://unpkg.com/vue@next"></script>
+	</head>
+	<body >
+		<div id="hello-vue" class="demo">
+		{{ message }}
+		<p v-if='okg'>我是控制语句</p>
+		<ul>
+			<li v-for='(value,index) in todos' :key='value'>
+				{{value.text}}
+			</li>
+		</ul>
+		</div>
+	
+		<script>
+		// const HelloVueApp = {
+		// 	data() {
+		// 		return {
+		// 			message: 'Hello Vue!!'
+		// 		}
+		// 	}
+		// }
+		// Vue.createApp(HelloVueApp).mount('#hello-vue')
+		
+		Vue.createApp({
+			data(){
+				return {
+					message:"hello Vue3.0",
+					okg:true,
+					 todos: [
+						{ text: 'Learn JavaScript' },
+						{ text: 'Learn Vue' },
+						{ text: 'Build something awesome' }
+					]
+				}
+			}
+		}).mount('#hello-vue')
+
+		
+		
+		</script>
+	</body>
+</html>
