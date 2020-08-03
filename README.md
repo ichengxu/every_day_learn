@@ -1,2 +1,2 @@
 # every_day_learn
-# https://hacker.rthe.net/year_month_day
+# https://hacker.rthe.net/year_month_day_number
