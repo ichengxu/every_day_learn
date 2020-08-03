@@ -1,0 +1,27 @@
+d>
+	<title>formData</tite></head>
+	<body>
+			<!-- 输入控件 不是表单因为没有form标签 -->
+				<input type='text' id='username' />
+					<input type='text' id='password' />
+						<input type='submit' id='submitBtn' value='提交' />
+	</body>
+	<cript>
+		
+		var oUsername = document.geElementById('username'),
+				oassword = ocument.getElementById('password'),
+						oSubmitBtn = document.getElementById('submitBtn'),
+								fd =new FormData();
+									
+									oSubmitBtn.oncick =function(){
+											fd.append('Username',oUsername.value);
+													fd.append('Password',oPassword.value);
+															console.log(fd) // 具有__proto__属性的空对象{}。但是可以通过fd.get（key）获取到
+																	console.log(fd.get('Username'),fd.get('Password'))
+
+																		fd.set('Username','哈哈');
+																				console.log(fd.has('Password'));
+																						fd.dlete('Password');
+																								console.log(fd.get('Password'))
+																									}
+																									</script>
