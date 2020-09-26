@@ -1,0 +1,52 @@
+pt>
+	const _items = Symbol'stck_items') //假的私有变量。可以通过Object.getOwnPropertySymbols
+		// const _items = weakmap();
+			class Stack{
+					constructor(){
+								this[_items] = []
+										}
+												push(element){
+															this[_items].push(element);
+																	}
+																			pop(){
+																						if (this.isEmpty()) {
+																									   return undefined;
+																									   			}
+																															return this[_items].pop()
+																																	}
+																																			peek(){
+																																						 if(this.isEmpty()) {
+																																						 				return undefined;
+																																													}
+																																													   			 return this[_items[this.size() - 1];
+																																																 		}
+																																																				isEmpty(){
+																																																							 return thissize() === 0;
+																																																							 		}
+																																																											size(){
+																																																														 return this[_items].length;
+																																																														 		}
+																																																																		clear() {
+																																																																					this[_items] = []
+																																																																							}
+																																																																									toString(){
+																																																																												if(this.isEmpty()){
+																																																																																return undefined;
+																																																																																			}
+																																																																																						retun this[_items].toString();
+
+																																																																																								}
+																																																																																										
+																																																																																								}
+																																																																																									let stack = new Stack()
+																																																																																										let stack1 = new Stack();
+																																																																																											stack.push('a')
+																																																																																												stack.push('b')
+																																																																																													tack.push('c')
+																																																																																														stack.push('1')
+																																																																																															sack.push('2')
+																																																																																																console.log(stack.size(),stack.peek())
+																																																																																																	console.log(stack.toString())
+																																																																																																		console.log(stack.isEmpty())
+																																																																																																			//console.log(stack[Object.etOwnPropertySymbols(stack)[0]])
+																																																																																																			</script>

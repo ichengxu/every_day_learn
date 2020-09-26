@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed与watch得区别</title>
+    <script src='https://unpkg.com/vue'></script>
+	<style>
+		.fade-enter-active,.fade-leave-active{
+			transition: opacity .5s;
+		}
+		.fade-enter, .fade-leave-to{
+			opacity:0;	
+		}
+		
+		
+	</style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 通过 .prevent 阻止超链接的默认跳转行为 -->
+
+		<!-- 可以通过:[]动态绑定属性。通过@[]动态绑定方法 -->
+
+		<!-- <button @[clicker+'move']='ha' >Button</button> -->
+		<input type='text' v-model='oText'>
+		<button @click='fn'>button</button>
+		<h1>{{oshow}}{{count}}</h1>
+		<!-- 
+			修饰符:
+				.stop:阻止冒泡
+				.prevent:阻止默认事件
+				.
+		 -->
+		<transition name="fade">
+        	<p v-if="seen">现在你看到我了</p>
+		</transition>
+		<div v-bind:style="[baseStyles, overridingStyles]">test</div>
+		<!-- 组合：keyup.ctrl或者keyup.alt如果单独触发一个用ascll比如ctrl就是keyup.17 -->
+		<input type='text' v-on:keyup.17="doSomething" />
+		<hr/>
+		多选：
+		<input type='checkbox' value='a' v-model='ck' />
+		<input type='checkbox' value='b' v-model='ck' />
+		<input type='checkbox' valye='c' v-model='ck' />
+		{{ck}}
+		<hr/>
+		单选：
+		<input type='radio' value='a' v-model='dx' />
+		<input type='radio' value='b' v-model='dx' />
+		<input type='radio' value='c' v-model='dx' />
+		<input type='radio' value='d' v-model='dx' />
+		{{dx}}
+		<hr />	
+		dasds
+		<parent @给我传递='hah' content='react1234'></parent>
+		{{ohah}}
+		<hr/>
+		<button v-for='i in olist' @click='tabs(i)'>  
+			{{i}}
+		</button>
+		<component :is='tabFn'></component>
+    </div>
+    <script>
+/*
+	computed是计算属性依赖其它属性得计算值.并且computed得值具有缓存只有当计算值变化才会返回内容
+	watch监听到值得的变化就会执行回调.在回调中可以进行一些列逻辑操作对于监听到值变化需要做一些复杂业务逻辑情况得可以使用watch
+
+*/	    var obj = {
+
+		}
+		Vue.component('parent',{
+			props:['content'],
+			template:`
+				<div>
+					<button @click='test'>Button</button>
+				</div>	
+			`,
+			methods:{
+				test(){
+					this.$emit('给我传递',this.content)
+				}
+			}
+			
+		})
+        var vm = new Vue({
+            el: '#app',
+            data: function(){
+				return {
+					count:0,
+					clicker:'mouse',
+					oText:'',
+					disabled:'disable',
+					isButtonDisabled:false,
+					a:1,
+					seen:true,
+					baseStyles:{
+						color:'red',
+						fontSize:'30px'
+					},
+					overridingStyles:{
+						fontWeight:'bold'
+					},
+					ck:[],
+					dx:'',
+					ohah:'',
+					ox:'',
+					olist:['home','frist','two']
+				}
+			},
+			mounted:function(){
+				// console.log(1)
+				// console.log(this.$parent.$children)
+			},
+            methods: {
+                linkClick: function () {
+                    console.log('超链接被点击了');
+                },
+				ha:function(){
+					alert(1)
+				},
+				tabs:function(value){
+					this.ox=value
+				},
+				fn(e){
+					this.count+=1;
+					console.log(e)
+					console.log(e.target.tagName)
+				},
+				doSomething(){
+					alert(1)
+				},
+				hah(value){
+					this.ohah = value;
+				}
+				
+            },
+			computed:{
+				test:{
+					get:function(){
+						return this.a+1
+					},
+					set:function(value){
+						this.a = value - 1
+					}
+				},
+				oshow(){
+					return this.oText.split('').reverse().join('')
+				},
+				tabFn:function(){
+					return	this.ox
+				}
+			}
+        })
+		
+		vm.$watch('obj',{
+			deep:true,
+			mmediate:true,
+			handler:function(val,oldVal){
+
+			}
+		})
+    </script>
+</body>
+
+</html>

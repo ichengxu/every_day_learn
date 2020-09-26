@@ -1,0 +1,58 @@
+pt>
+	class Stack{
+			#items= {;
+					#counts = 0;	
+							constructor(){
+										// this.#counts = 0
+												}
+														pu(element){
+																	this.#items[this.#counts] = element
+																				this.counts++
+																						}
+																							pop(){
+																										if (this.isEmpty()) {
+																													   return undefined;
+																													   			}
+																																			this.#cunts--;
+																																						const reslt = this.#items[this.#counts];
+																																									delete this.#items[this.#counts];
+																																												return result;
+																																													
+																																														peek(){
+																																																	 if(this.ismpty()) {
+																																																	 				return undefined;
+																																																								}
+																																																								   			 return this.#items[this.#counts - 1];
+																																																											 		}
+																																																															isEmpty(){
+																																																																		 return thi.#counts === 0;
+																																																																		 		}
+																																																																						size(){
+																																																																									 rturn this.#counts;
+																																																																									 		}
+																																																																													clear() {
+																																																																																this.#counts =0
+																																																																																			this.#items = {}
+																																																																																					}
+																																																																																							toStri() {
+																																																																																										if (this.isEmpty()) {
+																																																																																														return '';
+																																																																																																	}
+																																																																																																				let objString = `${this.#items[0]}`;
+																																																																																																						
+																																																																																																						for (let i = 1; i < this.#counts; i++) {
+																																																																																																									// objString = `${objString},${this.#items[i]}`;
+																																																																																																													objString += `,${this.#items[i]}`
+																																																																																																																}
+																																																																																																																			return  objString;
+																																																																																																																					}	
+																																																																																																																						}
+																																																																																																																							let stack = new Stack()
+																																																																																																																								stack.push('a')
+																																																																																																																									stack.push('b')
+																																																																																																																										stack.push('c')
+																																																																																																																											sack.push('1')
+																																																																																																																												stack.push('2')
+																																																																																																																													console.log(stack.size(),stack.pek())
+																																																																																																																														console.log(stack.toString())
+																																																																																																																														</script>

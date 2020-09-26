@@ -1,0 +1,63 @@
+CTYPE html>
+<html>
+	<head lang="en">
+		    <meta charset="UTF-">
+		        <tle></title>
+		    <style>
+        button {
+		            min: 10px;
+			            }
+
+	        div {
+			            width: 200px;
+				                height: 200px;
+						            background-colo:pink;
+							            }
+
+		        .show {
+				            display: block;
+					            }
+
+			        .hide {
+					            display: none;
+						            }
+				    </style>
+
+	</head>
+	ody>
+	<button id="btn">隐藏</butto>
+		<div>
+			    生命壹号
+		</div>
+
+	<script>
+		    //需求：点击button,隐藏盒子。改变文字，在点击按钮，显示出来。
+		    //步骤：
+		    //1.获取事件源和相关元素
+		    //2.绑定事件
+		    //3.书写事件驱动序
+			var btn = documentquerySelector('#btn')
+	var div = document.queryelector('div')
+    //.获取事件源和相关元素
+	
+    //2.绑定事件
+    btn.onclick = function () {
+	            //3.书写事件驱动程序
+	            //判断btn的innerHTML属性值，如果为隐藏就隐盒子，并按钮内容为显示。
+	            //反之，则显示，并修改按钮内容为隐藏
+	    		if(this.innerHTML==='隐藏'){
+							di.className = 'hide'
+							ths.innerHTML = '显示'
+						}else{
+										div.className = 'show'
+										this.innerHTML='隐藏'
+										
+									}
+	          
+	        }
+
+	</script>
+
+	</bdy>
+</html>
+

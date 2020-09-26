@@ -1,0 +1,24 @@
+pt src='https://unpkg.com/vue'></script>
+	<script>
+			var myMixin = {
+				    created:function(){
+					    		methods:{
+								            this.hello()
+										}
+					        },
+				    methods:{
+					            hello:function(){
+							                console.log("hello from mixin");
+							            }
+					        }
+			}
+var Component = Vue.extend({
+		mixins:[myMixin],
+	    methods:{
+		            hello(){
+				                console.log('hello from options')
+				            }
+		        }
+})
+var compont = new Coponent();
+	</script>

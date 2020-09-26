@@ -1,0 +1,93 @@
+d>
+	<title>es6 array新方法<tie>
+		</head>
+		<body>
+				<div id='app'></div>
+		</body>
+	<script>
+		let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+//@@iterator->array有个Symbol.itertor属性获取到iterator方法返回值为一个array，每一个返回值都有next方法->next方法回一个对象包括value【对应的值】与done【是否完成】如果done属性的值为false就意味着还有可迭代的值。
+/*
+let iterator = numbers[Symbol.iterator]();
+for(const n o iteator){
+	console.log(n)
+	}
+	console.log(iterator.next().value) 
+	*/
+
+
+
+//数组的 entries 、 keys 和 values 方法
+/*
+let aEntris = nmbers.entries(); // 得到键值对的迭代器@@iterator
+const aKeys = numbers.keys();     // 得到数组索引的迭代器@@iterator
+const aValues = numbers.keys();   // 得到数组的的迭代器@@iterator
+for(const n of aValue){
+	cnsole.log(n)
+	}
+	*/
+
+/使用 from 方法
+//复制数组和将类数组转换成数组
+//Array.from 方法根据已有的数组创建一个新数组
+//from也可以过滤数据
+
+*
+	let arr  Array.from(numbers,function(n){
+			if(n % 2===0){
+						return n
+					}
+	})
+conole.log(arr)
+*/
+	//使用 of 方法
+	//复制已有的数组
+	/*
+	let arr1 = Array.from(numbers)
+	let arr2 = Array.of(...numbers) //Array.of([1,2,3]) === Arra.of(1,2,3) 只是换种写法
+	console.log(arr1 === numbers,arr2 === numbers)
+	*/
+
+	//使用 fill 方法file(value,start,end)
+	//fill方法会改变原数组
+	//初始化
+	/*
+	let arr = numbers.fill(0,0)
+	console.log(arr)
+	*/
+
+	//使用 copyWithin 方法
+	//copyWithin(粘贴位置，复制的开始位置，复制的结束位置)
+	//方法复制数组中的一系列元素到同一数组指定的起始位置
+	/*
+	let copyArray = [1, 2, 3, 4, 5, 6];
+	copyArray.copyWithin(0,3)
+	*/
+	//find findIndex
+	//搜索一个满足回调函数条件的
+	/*
+	function multipleOf13(element, index, array) {
+	return (element % 13 == 0);
+	}
+	console.log(numbers.find(ultipleOf13));
+	console.log(numbers.findIndex(multipleOf13));
+	*/
+
+	//es7 included
+
+
+	//输出数组为字符串
+	/*
+	cosole.log(numbers.toString())
+	console.log(numbers.join(','))
+	*/
+
+	//类型数组
+	/*
+	let arr = new Int16Array(10)
+	arr.fill(1)
+	arr.fill('zzsdas')
+	console.log(arr)
+	*/
+
+	</script>

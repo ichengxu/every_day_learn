@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component</title>
+    <script src='https://unpkg.com/vue'></script>
+</head>
+
+<body>
+    <div id="app">
+		<my-componet1></my-componet1>
+		<my-componet2></my-componet2>
+		<my-componet3></my-componet3>
+		<div ref='oDiv'>{{name}}</div>
+    </div>
+    <script>
+		var myComponet1 = {
+			template:`
+				<div>
+					my is my_component_1
+				</div>
+			`
+		}
+		var myComponet2 = {
+			template:`
+				<div>
+					my is my_component_2
+				</div>
+			`
+		}
+		var myComponet3 = {
+			template:`
+				<div>
+					my is my_component_3
+				</div>
+			`
+		}
+        var vm = new Vue({
+            el: '#app',
+            data: function(){
+				return {
+					name:'reactjs',
+					age:'20',
+					msg: 'Hello Vue.'
+				}
+			},
+			mounted:function(){
+				this.test()
+			},
+            methods: {
+				test(){
+					this.name = '测试哈哈'
+					console.log(this.$refs.oDiv.innerHTML)
+					setTimeout(()=>{
+						console.log(this.$refs.oDiv.innerHTML)
+					},0)
+					this.$nextTick(()=>{
+						console.log(this.$refs.oDiv.innerHTML)
+					})
+				}
+            },
+			components:{
+				'my-componet1':myComponet1,
+				myComponet2,
+				'myComponet3':myComponet3
+			},
+			computed:{
+			
+			}
+        })
+    </script>
+</body>
+
+</html>

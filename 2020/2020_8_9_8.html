@@ -1,0 +1,70 @@
+d>
+	<title>stack的应用</tite>/head>
+	<script>
+		class Stack{
+					#items = {};
+					#counts = 0;	
+					constructor(){
+									// this.#counts = 0;
+								}
+					push(element){
+									this.#items[this.#counts] = element
+								this.#counts++
+								}
+					pop(){
+									if (this.isEmpty()) {
+													   rturn undefined;
+													}
+									this.#counts--;
+									const result = this.#items[this.#counts];
+									delete this.#items[this.#count];
+									return rsult;
+								}
+					peek(){
+									 if(this.isEmpty()) {
+										 				returnundefined;
+										 			
+										    			 return this.#items[this.counts - 1];
+										 		}
+								isEmpty(){
+												 return this.#counts === 0;
+											}
+								size(){
+												 return this.#counts;
+											}
+								clear {
+												this.#counts = 0
+												this.#items = {}
+											}
+								toSring() {
+												if (this.isEmpty()) {
+																	return '';
+																}
+												let objString = `${this.#items[0]}`;
+											
+												for (let i= 1; i < this.#counts; i++) {
+																	// bjString = `${objString},${this.#items[i]}`;
+																	objString += `,${this.#items[i]}`
+																}
+												return  objString;
+											}	
+							}
+				// 10%2 5%2 2%2 1%2 
+				function decimaToBinary(decNumber) {
+							const remStack = new Stack();
+							let numbe = decNumber;
+							let rem;
+							let binaryString = '';
+							while (number > 0) {
+										rem = Math.floor(number % 2); 
+										remStack.push(rem); 
+										number= Math.floor(number / 2); 
+										}
+							while (!remStack.isEmpty()) { 
+										binaryStrig += remStack.pop().toString();
+										}
+							return binaryString;
+						}
+				console.log( decimalToBinary(10) )
+
+	</script>
